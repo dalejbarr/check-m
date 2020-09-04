@@ -3,6 +3,8 @@ suppressPackageStartupMessages(library("tidyr"))
 suppressPackageStartupMessages(library("purrr"))
 suppressPackageStartupMessages(library("ggplot2"))
 
+theme_set(theme_bw())
+
 my_path <-
   if (interactive()) {
     "."
@@ -62,7 +64,7 @@ mstats <- alldat %>%
   ungroup() %>%
   arrange(allocation, effsize, case, factor, model) %>%
   select(-ns, -nobs) %>%
-  mutate(model = "GAMM-regfs")
+  mutate(model = "GAMM-m=1")
 
 sres <- readRDS("../data_derived/simulation_results.rds")
 
@@ -106,6 +108,7 @@ effA <- ggplot(
 	legend.box.margin = margin(-5, 0, -5, 0),        
 	axis.text.x = element_text(size = 5),
 	axis.text.y = element_text(size = 7)) +
+  scale_color_viridis_d() +
   labs(x = "raw effect", y = "proportion significant")
 
 effB <- ggplot(
@@ -121,6 +124,7 @@ effB <- ggplot(
 	legend.box.margin = margin(-5, 0, -5, 0),        
 	axis.text.x = element_text(size = 7),
 	axis.text.y = element_text(size = 7)) +
+  scale_color_viridis_d() +
   labs(x = "raw effect", y = "proportion significant")
 
 effAB <- ggplot(
@@ -136,6 +140,7 @@ effAB <- ggplot(
 	legend.box.margin = margin(-5, 0, -5, 0),        
 	axis.text.x = element_text(size = 7),
 	axis.text.y = element_text(size = 7)) +
+  scale_color_viridis_d() +
   labs(x = "raw effect", y = "proportion significant")
 
 ggsave("eff_A.png", effA, width = 10, height = 5)

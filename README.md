@@ -7,3 +7,5 @@ singularity exec library://dalejbarr/talklab/autocorr acsim_m XXXX
 ```
 
 where XXXX is the number of simulation runs you want (default = 1000).
+
+For further information see <https://osf.io/cp9z8/>.
